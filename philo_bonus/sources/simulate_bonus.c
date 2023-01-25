@@ -63,7 +63,7 @@ static void	destroy(t_manager *manager, int n)
 {
 	while (--n >= 0)
 	{
-		unlink("sm_eat");
+		sem_unlink("sm_eat");
 		sem_close(manager->sm_eat[n]);
 		kill(manager->pids[n], SIGTERM);
 	}
