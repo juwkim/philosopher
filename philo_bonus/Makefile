@@ -6,14 +6,14 @@
 #    By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/22 14:48:00 by juwkim            #+#    #+#              #
-#    Updated: 2023/01/25 02:20:25 by juwkim           ###   ########.fr        #
+#    Updated: 2023/01/25 14:37:31 by juwkim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Define the compiler and flags
 
 CC					:=	cc
-CFLAGS				:=	-Wall -Wextra -Werror -march=native -O2 -pipe -MMD -fsanitize=address -fsanitize=leak
+CFLAGS				:=	-Wall -Wextra -Werror -march=native -O2 -pipe -MMD
 
 # Define the directories
 

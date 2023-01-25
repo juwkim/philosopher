@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 22:56:59 by juwkim            #+#    #+#             */
-/*   Updated: 2023/01/25 03:16:46 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/01/25 14:50:29 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	simulate(t_manager *manager)
 	sem_all_init(manager);
 	sem_wait(manager->sm_start);
 	manager->start_time = get_milisecond(0);
+	manager->is_died = false;
 	idx = -1;
 	while (++idx < manager->philo_count)
 	{

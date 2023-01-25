@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 22:56:53 by juwkim            #+#    #+#             */
-/*   Updated: 2023/01/25 03:14:58 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/01/25 14:50:42 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,10 @@ static void	*check_died(void *arg)
 			time_interval = get_milisecond(manager->start_time);
 		else
 			time_interval = get_milisecond(manager->last_eat_time[philo->id]);
-		if (manager->is_died == false && time_interval > manager->time_to_die)
+		if (time_interval > manager->time_to_die)
 		{
 			print_died(manager->sm_print, manager->start_time, philo->id, DIE);
 			sem_post(manager->sm_dead);
-			manager->is_died = true;
 		}
 		sem_post(manager->sm_eat[philo->id]);
 		msleep(1);

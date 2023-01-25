@@ -6,7 +6,7 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 22:56:49 by juwkim            #+#    #+#             */
-/*   Updated: 2023/01/25 00:46:53 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/01/25 14:39:02 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,4 @@ void	print_done(sem_t *sm_print)
 {
 	sem_wait(sm_print);
 	printf(GREEN "Simulation stopped successfully!\n" DEF_COLOR);
-	exit(EXIT_SUCCESS);
 }
