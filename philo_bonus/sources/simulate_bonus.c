@@ -38,7 +38,7 @@ void	simulate(t_manager *manager)
 		if (manager->pids[idx] == 0)
 			return (philosopher(philos + idx));
 		if (manager->pids[idx] < 0)
-			return ;
+			break ;
 	}
 	if (idx == manager->philo_count)
 		manage(manager);
@@ -47,15 +47,10 @@ void	simulate(t_manager *manager)
 
 static void	sem_all_init(t_manager *manager)
 {
-	sem_unlink("sm_dead");
 	manager->sm_dead = sem_open("sm_dead", O_CREAT, 0644, 0);
-	sem_unlink("sm_done");
 	manager->sm_done = sem_open("sm_done", O_CREAT, 0644, 0);
-	sem_unlink("sm_start");
 	manager->sm_start = sem_open("sm_start", O_CREAT, 0644, 1);
-	sem_unlink("sm_print");
 	manager->sm_print = sem_open("sm_print", O_CREAT, 0644, 1);
-	sem_unlink("sm_fork");
 	manager->sm_fork = sem_open("sm_fork", O_CREAT, 0644, manager->philo_count);
 }
 
