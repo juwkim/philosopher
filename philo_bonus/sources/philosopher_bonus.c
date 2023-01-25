@@ -6,14 +6,14 @@
 /*   By: juwkim <juwkim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 22:56:53 by juwkim            #+#    #+#             */
-/*   Updated: 2023/01/25 14:50:42 by juwkim           ###   ########.fr       */
+/*   Updated: 2023/01/25 15:36:19 by juwkim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher_bonus.h"
 
 static void	*check_died(void *arg);
-static void	eat(t_philosopher *philo);
+static bool	eat(t_philosopher *philo);
 
 void	philosopher(t_philosopher *philo)
 {
@@ -27,7 +27,8 @@ void	philosopher(t_philosopher *philo)
 		return ;
 	while (true)
 	{
-		eat(philo);
+		if (eat(philo) == true)
+			return ;
 		print_state(manager->sm_print, manager->start_time, philo->id, SLEEP);
 		msleep(manager->time_to_sleep);
 		print_state(manager->sm_print, manager->start_time, philo->id, THINK);
@@ -60,10 +61,12 @@ static void	*check_died(void *arg)
 	return (NULL);
 }
 
-static void	eat(t_philosopher *philo)
+static bool	eat(t_philosopher *philo)
 {
 	t_manager	*manager;
+	bool		ended;
 
+	ended = false;
 	manager = philo->manager;
 	sem_wait(manager->sm_fork);
 	print_state(manager->sm_print, manager->start_time, philo->id, PICKUP);
@@ -74,9 +77,13 @@ static void	eat(t_philosopher *philo)
 	manager->last_eat_time[philo->id] = get_milisecond(0);
 	++manager->eat_count[philo->id];
 	if (manager->eat_count[philo->id] == manager->must_eat)
+	{
 		sem_post(manager->sm_done);
+		ended = true;
+	}
 	sem_post(manager->sm_eat[philo->id]);
 	msleep(manager->time_to_eat);
 	sem_post(manager->sm_fork);
 	sem_post(manager->sm_fork);
+	return (ended);
 }
